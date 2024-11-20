@@ -2,8 +2,8 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> jogo de capturar objetos caindo</title>
 
   <style> 
@@ -11,7 +11,7 @@
   canvas {
     background-color:lightblue;
     display: block;
-    margin:0 auto;
+    margin: 0 auto;
   }
 
    </style>
@@ -20,14 +20,14 @@
  
  <body>
     
-<canvas id="gamecanvas" width="500" height="500"></canvas>
+<canvas id="gameCanvas" width="500" height="500"></canvas>
 
 <script>
     //seleciona o canvas e o contextos 2D
-    const canvas= document.getElementById("gameCanvas");
+    const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getConstext("2D");
 
-    //VARIAVEIS do jogo
+    //variaveis do jogo
 
     let jogadorX = canvas.width / 2 - 25; // posicao inicial do jogador
     const jogadorLargura = 50; // largura do jogador
@@ -43,7 +43,7 @@
     //captura as teclas pressionadas 
 
     function desenhaJogador() {
-        ctx.fillstyle = "green";
+        ctx.fillStyle = "green";
         ctx.fillRect(jogadorX, canvas.heigth - jogadorAltura, jogadorLargura, jogadorAtivo)
 
     } 
