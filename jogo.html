@@ -44,13 +44,13 @@
 
     function desenhaJogador() {
         ctx.fillstyle = "green";
-        ctx.fillRect(jogadorX, canvas.heigth - jogadorAltura, jogadorLargura, jogadorA )
+        ctx.fillRect(jogadorX, canvas.heigth - jogadorAltura, jogadorLargura, jogadorAtivo)
 
     } 
 
     //funcao para desenhar o objeto caindo
     function desenhaObjeto(){
-        ctx.fillstyle = "blue";
+        ctx.fillstyle = "green";
         ctx.fillRect (objetoX, objetoY, objetoLargura, objetoAltura);
         }
         //funcao para desenhar a pontuacao
