@@ -59,14 +59,14 @@
         //funcao para desenhar a pontuacao
         function desenhaPontuacao(){
             ctx.fillstyle = "black";
-            ctx.font = "20 px Arial";
+            ctx.font = "20px Arial";
             ctx.fillstyle("pontuacao: " + pontuacao, 10, 20);
 
         }
 
         //funcao para atualizar a posicao do jogador e objeto
         function atualizar(){
-            if (setaDireita && jogadorX < canvas.width - jogadorlargura){
+            if (setaDireita && jogadorX < canvas.width - jogadorlargura) {
                 jogadorX += 7; // move o jogador para a direita 
             } else if (setaEsquerda && jogadorX > 0) {
                 jogadorX -= 7; // move o jogador para a esquerda  
@@ -74,28 +74,36 @@
             }
             
             // atualiza a posicao do objeto caindo 
-            objetoY += velocidadeObejto;
+            objetoY += velocidadeObjeto;
         
-            }
-           //verifica a colisao com o jogador
+        }
+           //verifica se o objeto tocou o chao
+
+           if (objetoY > canvas.heigth) {
+            jogoAtivo = false; // o jogo acaba
+            alert("fim de jogo! sua pontuacao foi: " + pontuacao);
+            document.location.reload(); // renicia  o jogo
+           }
+           // verifica a colisao com o jogador 
            if (
             obejtoY + objetoAltura > canvas.heigth - jogadorAltura &&
             objetoX + objetoLargura > jogadorX && 
             objetoX < jogadorX + jogadorLargura
-           ){
+           ) 
+           {
              pontuacao++; // aumenta a pontuacao
              //reposiciona o objeto no topo, em uma posicao aleatoria
-             objetoX= math.random()+(canvas.width - objetoLargura);
+             objetoX = math.random() * (canvas.width - objetoLargura);
              objetoY = 0;
              velocidadeObjeto += 0.5; // aumenta a velocidade do objeto gradualmente
 
 
-           }
+           }  
 
            //funcao principal do jogo
-           function desenhar(){
-            if (jogadorAtivo){
-                //limpa canvas
+           function desenhar() {
+            if (jogoAtivo) {
+                //limpa o canvas
                 ctx.clearRect(0,0, canvas.width, canvas.heigth);
 
                 //desenha os elementos do jogo
