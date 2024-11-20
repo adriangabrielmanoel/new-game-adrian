@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title> jogo de capturar objetos caindo</title>
+
+  <style> 
+  /*definindo o estilo de tela de jogo*/
+  canvas {
+    background-color:darkred;
+    display: block;
+    margin:0 auto;
+  }
+
+   </style>
+  </head>
+ <body>
+    
+<canvas id="gamecanvas" width="500" height="500"></canvas>
+
+<script>
+    //seleciona o canvas e o contextos 2D
+    const canvas= document.getElementById("gameCanvas");
+    const ctx = canvas.getConstext("2D");
+
+    //VARIAVEIS do jogo
+
+    let jogadorX = canvas.width / 2 - 25; // posicao inicial do jogador
+    const jogadorLargura = 50; // largura do jogador
+    const jogadorAltura = 20; //altura do jogador
+    let objetoX = math.random() * (canvas.width - 20 ); // posicao inicial do objeto
+    let objetoY = 0; //o objeto comeca o jogo
+    const objetoLargura = 20; // largura do objeto 
+    const objetoAltura = 20; // altura do objeto 
+    let velocidadeObjeto = 3; // velocidade de queda do objeto
+    let pontuacao = 0; // pontuacao inicial
+    let jogoAtivo = true; // controla se o jogo esta ativo
+
+    //captura as teclas pressionadas 
+
+    function desenhaJogador() {
+        ctx.fillstyle = "green";
+        ctx.fillRect(jogadorX, canvas.heigth - jogadorAltura, jogadorLargura, jogadorA )
+
+    } 
+
+    //funcao para desenhar o objeto caindo
+    function desenhaObjeto(){
+        ctx.fillstyle = "blue";
+        ctx.fillRect (objetoX, objetoY, objetoLargura, objetoAltura);
+        }
+        //funcao para desenhar a pontuacao
+        function desenhaPontuacao(){
+            ctx.fillstyle = "black";
+            ctx.font = "20 px Arial";
+            ctx.fillstyle("pontuacao: " + pontuacao, 10, 20);
+
+        }
+
+        //funcao para atualizar a posicao do jogador e objeto
+        function atualizar(){
+            if (setaDireita && jogadorX < canvas.width - jogadorlargura){
+                jogadorX += 7; // move o jogador para a direita 
+            } else if (setaEsquerda && jogadorX > 0) {
+                jogadorX -= 7; // move o jogador para a esquerda  
+
+            }
+            
+            // atualiza a posicao do objeto caindo 
+            objetoY += velocidadeObejto;
+        
+            }
+           //verifica a colisao com o jogador
+           if (
+            obejtoY + objetoAltura > canvas.heigth - jogadorAltura &&
+            objetoX + objetoLargura > jogadorX && 
+            objetoX < jogadorX + jogadorLargura
+           ){
+             pontuacao++; // aumenta a pontuacao
+             //reposiciona o objeto no topo, em uma posicao aleatoria
+             objetoX= math.random()+(canvas.width - objetoLargura);
+             objetoY = 0;
+             velocidadeObjeto += 0.5; // aumenta a velocidade do objeto gradualmente
+
+
+           }
+
+           //funcao principal do jogo
+           function desenhar(){
+            if (jogadorAtivo){
+                //limpa canvas
+                ctx.clearRect(0,0, canvas.width, canvas.heigth);
+
+                //desenha os elementos do jogo
+                desenhaJogador();
+                desenhaObjeto();
+                desenhaPontuacao();
+            //atualiza a posicao dos elementos
+            atualizar();
+
+            //chama o proxim frame 
+
+            requestAnimationFrame(desenhar);
+             }
+           }
+
+           //captura os eventos de teclado 
+
+           document.addEventListener("Keydown", function (event) {
+            if (event.key === "ArrowRight") {
+                setaDireita = true;
+            } else if (event.key === "Arrowleft") {
+                setaEsquerda = true;
+            }
+           
+           });
+           
+           document.addListener("keyup", function (event){
+            if (event.key === "arrowRigth") {
+                setaDireita = false;
+            } else if (event.key === "ArrowLeft"){
+                setaEsquerda = false;
+            }
+            
+           });
+           //inicia o jogo
+           desenhar();
+           </script>
+           </body>
+            </html>
+           
+           
